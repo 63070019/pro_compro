@@ -240,6 +240,7 @@ void delete_item(struct goods item[]){
 
 void search_item(struct goods item[]){
     char n_id[10];
+    int state;
     printf("\n\t ID:    ");
     scanf("%s", n_id);
     for(int j = 0; j<count; j++){
@@ -249,6 +250,11 @@ void search_item(struct goods item[]){
             printf("\tType:\t%s\n", item[j].type);
             printf("\tPrice:\t%.2lf\n", item[j].price);
         }
+    }
+    printf("\n\t0.ย้อนกลับ\n");
+    scanf("%d", &state);
+    if(state == 0){
+        manager_menu(item);
     }
 }
 
