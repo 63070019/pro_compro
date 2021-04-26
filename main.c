@@ -57,10 +57,10 @@ int main(){
 void manager_menu(struct goods item[]){
     int state;
     printf("\tWelcome Manager\n");
-    printf("\t1.ดูสินค้าทั้งหมด\n");
-    printf("\t2.เพิ่มสินค้า\n");
-    printf("\t3.แก้ไขสินค้า\n");
-    printf("\t4.ค้นหาสินค้า\n");
+    printf("\t1.View all products\n");
+    printf("\t2.Add products\n");
+    printf("\t3.Edit product list\n");
+    printf("\t4.Search for products\n");
 
 
     scanf("%d", &state);
@@ -86,7 +86,7 @@ void add_item(struct goods item[]){
     int i;
     int get;
     char t[50];
-    printf("\tกรุณาป้อนจำนวนสินค้าที่เพิ่ม:  ");
+    printf("\tInput number of products that you want to add:  ");
     scanf("%d", &get);
     for(int j=count; j<count+get; j++){
         printf("\n\titem No.%d", j+1);
@@ -108,8 +108,8 @@ void add_item(struct goods item[]){
         scanf("%lf", &item[j].price);
     }
     count += get;
-    printf("\n\tป้อนข้อมูลสำเร็จ !!!!!\n");
-    printf("\t0.ย้อนกลับ\n");
+    printf("\n\tCompleted !!!!!\n");
+    printf("\t0.Go Back\n");
     scanf("%d", &i);
     if(i == 0){
         manager_menu(item);
@@ -121,7 +121,7 @@ void add_item(struct goods item[]){
 void check_item(){
     if(count == 0){
         printf("\tNo\t\tID\t\tName\t\tType\t\tPrice\n");
-        printf("\n\n\t\t\t\t\tไม่มีสินค้า\n\n");
+        printf("\n\n\t\t\t\t\tDon't have product\n\n");
     }
 }
 
@@ -144,7 +144,7 @@ void stock(struct goods item[]){
 void see_itme(struct goods item[]){
     int i;
     stock(item);
-    printf("\t0.ย้อนกลับ\n");
+    printf("\t0.Go Back\n");
     scanf("%d", &i);
     if(i == 0){
         manager_menu(item);
@@ -155,9 +155,9 @@ void see_itme(struct goods item[]){
 void edit_item(struct goods item[]){
     int state;
     stock(item);
-    printf("\n\t1.ต้องการเปลี่ยนข้อมูล\n");
-    printf("\t2.ต้องการลบข้อมูล\n");
-    printf("\t0.ย้อนกลับ\n");
+    printf("\n\t1.Want to edit data\n");
+    printf("\t2.want to delete data\n");
+    printf("\t0.Go Back\n");
 
     scanf("%d", &state);
     if(state == 1){
@@ -186,7 +186,7 @@ void change(struct goods item[]){
                 printf("\t2.Name:  \n");
                 printf("\t3.Type:  \n");
                 printf("\t4.Price:  \n");
-                printf("\t0.ย้อนกลับ:  \n");
+                printf("\t0.Go Back:  \n");
                 scanf("%d", &state);
                 if(state == 1){
                     printf("\n\tID:  ");
@@ -211,7 +211,7 @@ void change(struct goods item[]){
                     ation = false;
                 }
                 if(state !=  0){
-                    printf("\tแก้ไขสำเร็จ  !!!\n");
+                    printf("\tCompleted  !!!\n");
                 }
                 
             }
@@ -251,7 +251,7 @@ void search_item(struct goods item[]){
             printf("\tPrice:\t%.2lf\n", item[j].price);
         }
     }
-    printf("\n\t0.ย้อนกลับ\n");
+    printf("\n\t0.Go Back\n");
     scanf("%d", &state);
     if(state == 0){
         manager_menu(item);
