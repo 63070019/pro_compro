@@ -15,44 +15,41 @@ struct goods
     char type[30];
     double price;
     int quantity;
+    int dis_count;
 };
 
 
-struct person
-{
-    double result_b;
-
-};
 
 
-void main_menu(struct goods item[], struct person user[]);
+
+void main_menu(struct goods item[]);
 
 
-void manager_menu(struct goods item[], struct person user[]);
+void manager_menu(struct goods item[]);
 void check_item();
-void see_itme(struct goods item[], struct person user[]);
-void add_item(struct goods item[], struct person user[]);
+void see_itme(struct goods item[]);
+void add_item(struct goods item[]);
 void stock(struct goods item[]);
-void change(struct goods item[], struct person user[]);
-void edit_item(struct goods item[], struct person user[]);
-void delete_item(struct goods item[], struct person user[]);
-void search_item(struct goods item[], struct person user[]);
+void change(struct goods item[]);
+void edit_item(struct goods item[]);
+void delete_item(struct goods item[]);
+void search_item(struct goods item[]);
 
 
-void guest_menu(struct goods item[], struct person user[]);
+void guest_menu(struct goods item[]);
 
-void cal_user(struct goods item[], struct person user[]);
-void select_item(struct goods item[], struct person user[]);
+void cal_user(struct goods item[]);
+void select_item(struct goods item[]);
+void bill(struct goods item[], double result);
 
 
 
 int main(){
     struct goods item[count_item];
-    struct person user[count_user];
-    main_menu(item, user);
+    main_menu(item);
 }
 
-void main_menu(struct goods item[], struct person user[]){
+void main_menu(struct goods item[]){
     printf("\tmenu\n");
     printf("\t1.guest\n");
     printf("\t2.manager\n");
@@ -62,15 +59,15 @@ void main_menu(struct goods item[], struct person user[]){
     int i;
     scanf("%d", &i);
     if(i == 1){
-        guest_menu(item, user);
+        guest_menu(item);
     }
      else if (i == 2){
-        manager_menu(item, user);
+        manager_menu(item);
     }
 }
 
 
-void manager_menu(struct goods item[], struct person user[]){
+void manager_menu(struct goods item[]){
     int state;
     printf("\tWelcome Manager\n");
     printf("\t1.ดูสินค้าทั้งหมด\n");
@@ -82,19 +79,19 @@ void manager_menu(struct goods item[], struct person user[]){
 
     scanf("%d", &state);
     if(state == 1){
-        see_itme(item, user);
+        see_itme(item);
     }
     else if (state == 2){
-        add_item(item, user);
+        add_item(item);
     }
     else if (state == 3){
-        edit_item(item, user);
+        edit_item(item);
     }
     else if (state == 4){
-        search_item(item, user);
+        search_item(item);
     }
     else if (state == 0){
-        main_menu(item, user);
+        main_menu(item);
     }
     
 
@@ -102,7 +99,7 @@ void manager_menu(struct goods item[], struct person user[]){
 
 
 
-void add_item(struct goods item[], struct person user[]){
+void add_item(struct goods item[]){
     int i;
     int get;
     char t[50];
@@ -129,13 +126,15 @@ void add_item(struct goods item[], struct person user[]){
 
         printf("\tQuantity:\t");
         scanf("%d", &item[j].quantity);
+
+        item[j].dis_count = 0;
     }
     count_item += get;
     printf("\n\tป้อนข้อมูลสำเร็จ !!!!!\n");
     printf("\t0.ย้อนกลับ\n");
     scanf("%d", &i);
     if(i == 0){
-        manager_menu(item, user);
+        manager_menu(item);
     }
     
 }
@@ -165,18 +164,18 @@ void stock(struct goods item[]){
     }
 }
 
-void see_itme(struct goods item[], struct person user[]){
+void see_itme(struct goods item[]){
     int i;
     stock(item);
     printf("\t0.ย้อนกลับ\n");
     scanf("%d", &i);
     if(i == 0){
-        manager_menu(item, user);
+        manager_menu(item);
     }
 }
 
 
-void edit_item(struct goods item[], struct person user[]){
+void edit_item(struct goods item[]){
     int state;
     stock(item);
     printf("\n\t1.ต้องการเปลี่ยนข้อมูล\n");
@@ -185,17 +184,17 @@ void edit_item(struct goods item[], struct person user[]){
 
     scanf("%d", &state);
     if(state == 1){
-        change(item, user);
+        change(item);
     }
     else if(state == 2){
-        delete_item(item, user);
+        delete_item(item);
     }
     else if(state == 0){
-        manager_menu(item, user);
+        manager_menu(item);
     }
 }
 
-void change(struct goods item[], struct person user[]){
+void change(struct goods item[]){
     int num;
     int state;
     char t[50];
@@ -246,10 +245,10 @@ void change(struct goods item[], struct person user[]){
             }
         }
     }
-    edit_item(item, user);
+    edit_item(item);
 }
 
-void delete_item(struct goods item[], struct person user[]){
+void delete_item(struct goods item[]){
     int num;
     int state;
     printf("\n\t No.:   ");
@@ -265,10 +264,10 @@ void delete_item(struct goods item[], struct person user[]){
         }
     }
     count_item--;
-    edit_item(item, user);
+    edit_item(item);
 }
 
-void search_item(struct goods item[], struct person user[]){
+void search_item(struct goods item[]){
     char n_id[10];
     int state;
     printf("\n\t ID:    ");
@@ -285,18 +284,20 @@ void search_item(struct goods item[], struct person user[]){
     printf("\n\t0.ย้อนกลับ\n");
     scanf("%d", &state);
     if(state == 0){
-        manager_menu(item, user);
+        manager_menu(item);
     }
 }
 
-void guest_menu(struct goods item[], struct person user[]){
+void guest_menu(struct goods item[]){
     printf("\t\tWelcome To Shop\n");
-    cal_user(item, user);
-
+    select_item(item);
 }
 
 
-void select_item(struct goods item[], struct person user[]){
+
+
+
+void select_item(struct goods item[]){
     bool ation = true;
     double result = 0;
     while (ation)
@@ -321,19 +322,40 @@ void select_item(struct goods item[], struct person user[]){
                         printf("\t%s\tจำนวน:\t", item[j].name);
                         scanf("%d", &num);
                         if(num == 0){
-                            select_item(item, user);
+                            select_item(item);
                         }
                     }
                     result += item[j].price*num;
                     item[j].quantity = item[j].quantity - num;
+                    item[j].dis_count += num;
                 }
             }
         }
+        else if (state == 0){
+           bill(item, result);
+        }
     }
-
 }
 
 
-void cal_user(struct goods item[], struct person user[]){
-    select_item(item, user);
+
+
+void bill(struct goods item[], double result){
+    int state;
+    printf("\n\n");
+    printf("\tสินค้า\tจำนวน\tราคา\n");
+    for(int j=0; j<count_item; j++){
+        if(item[j].dis_count > 0){
+            printf("\t%s\tx%d\t%.2lf\n", item[j].name, item[j].dis_count, item[j].dis_count*item[j].price);
+            item[j].dis_count = 0;
+        }
+    }
+
+    printf("\n\n\tจำนวนเงินที่ต้องชำระ: %.2lf\n\n", result);
+    printf("\t0.กลับไปหน้าแรก\n");
+    scanf("%d", &state);
+    if(state == 0){
+        main_menu(item);
+    }
+
 }
