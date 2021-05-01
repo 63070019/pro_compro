@@ -62,9 +62,9 @@ int main_menu(struct goods item[])      //หน้าเมนูหลัก//
     int state;
     while (true)
     {
-        printf("\n\n\t\t\t\tmenu\n\n");
-        printf("\t1.guest\n");
-        printf("\t2.manager\n");
+        printf("\n\n\t\t\t\tMenu\n\n");
+        printf("\t1.Guest\n");
+        printf("\t2.Manager\n");
         scanf("%d", &state);
         if(state == 1 || state == 2){
             break;
@@ -84,11 +84,11 @@ void manager_menu(struct goods item[])  //หน้าเมนูของผ�
 {
     int state;
     printf("\n\n\t\t\t\tWelcome Manager\n\n");
-    printf("\t1.ดูสินค้าทั้งหมด\n");
-    printf("\t2.เพิ่มสินค้า\n");
-    printf("\t3.แก้ไขสินค้า\n");
-    printf("\t4.ค้นหาสินค้า\n");
-    printf("\t0.ย้อนกลับ\n");
+    printf("\t1.View all products\n");
+    printf("\t2.Add products\n");
+    printf("\t3.Edit products\n");
+    printf("\t4.Search product\n");
+    printf("\t0.Go back\n");
 
 
     scanf("%d", &state);
@@ -118,8 +118,8 @@ void add_products(struct goods item[])  //function เพิ่มสินค�
     int i;
     int get;
     char t[50];
-    printf("\n\n\t\t\t\tเพิ่มสินค้า\n\n");
-    printf("\tกรุณาป้อนจำนวนสินค้าที่เพิ่ม:  ");
+    printf("\n\n\t\t\t\tAdd products\n\n");
+    printf("\tInput number of products that you want to add:  ");
     scanf("%d", &get);
     for(int j=count_item; j<count_item+get; j++){
         printf("\n\titem No.%d", j+1);
@@ -145,8 +145,8 @@ void add_products(struct goods item[])  //function เพิ่มสินค�
 
     }
     count_item += get;
-    printf("\n\n\t\t\t\tป้อนข้อมูลสำเร็จ !!!!!\n\n");
-    printf("\n\t0.ย้อนกลับ\n");
+    printf("\n\n\t\t\t\tCompleted !!!!!\n\n");
+    printf("\n\t0.Go back\n");
     scanf("%d", &i);
     if(i == 0){
         manager_menu(item);
@@ -159,7 +159,7 @@ void check_item()   //function เช็คว่ามีสินค้าใ�
 {
     if(count_item == 0){
         printf("\n\n\tNo\t\tID\t\tName\t\tType\t\tPrice\n\n");
-        printf("\n\n\t\t\t\t\tไม่มีสินค้า\n\n");
+        printf("\n\n\t\t\t\t\tNot found\n\n");
     }
 }
 
@@ -185,7 +185,7 @@ void show_item(struct goods item[])     //function แสดงสินค้�
 {
     int i;
     stock(item);
-    printf("\n\t0.ย้อนกลับ\n");
+    printf("\n\t0.Go back\n");
     scanf("%d", &i);
     if(i == 0){
         manager_menu(item);
@@ -196,11 +196,11 @@ void show_item(struct goods item[])     //function แสดงสินค้�
 void edit_item(struct goods item[])     //function เมนูแก้ไขสินค้า//
 {
     int state;
-    printf("\n\n\t\t\t\tแก้ไขสินค้า\n\n");
+    printf("\n\n\t\t\t\tEdit products\n\n");
     stock(item);
-    printf("\n\n\n\t1.ต้องการเปลี่ยนข้อมูล\n");
-    printf("\t2.ต้องการลบข้อมูล\n");
-    printf("\t0.ย้อนกลับ\n");
+    printf("\n\n\n\t1.Edit product\n");
+    printf("\t2.Remove product\n");
+    printf("\t0.Go back\n");
 
     scanf("%d", &state);
     if(state == 1){
@@ -231,7 +231,7 @@ void change(struct goods item[])    //function เปลี่ยนของข
         printf("\t3.Type\n");
         printf("\t4.Price\n");
         printf("\t5.Quantity\n");
-        printf("\t0.ย้อนกลับ\n");
+        printf("\t0.Go back\n");
         scanf("%d", &state);
         if(state == 1){
             printf("\n\tID:\t");
@@ -260,7 +260,7 @@ void change(struct goods item[])    //function เปลี่ยนของข
             break;
         }
         if(state !=  0){
-            printf("\n\tแก้ไขสำเร็จ  !!!\n\n");
+            printf("\n\tEdit completed  !!!\n\n");
         }
     }
     edit_item(item);
@@ -293,7 +293,7 @@ void search_item(struct goods item[])   //function ค้าหาสินค�
     char n_id[10];
     int state;
     int found = 0;
-    printf("\n\n\t\t\t\tคันหาสินค้า\n\n");
+    printf("\n\n\t\t\t\tSearch product\n\n");
     printf("\n\t ID:\t");
     scanf("%s", n_id);
     for(int j = 0; j<count_item; j++){
@@ -307,9 +307,9 @@ void search_item(struct goods item[])   //function ค้าหาสินค�
         }
     }
     if(found == 0){
-        printf("\n\n\tไม่พบสินค้า\n\n");
+        printf("\n\n\tNot found\n\n");
     }
-    printf("\n\t0.ย้อนกลับ\n");
+    printf("\n\t0.Go back\n");
     scanf("%d", &state);
     if(state == 0){
         manager_menu(item);
@@ -337,11 +337,11 @@ void select_item(struct goods item[], double result)    //function เมนู�
     while (true)
     {
         stock(item);
-        printf("\n\n\tยอมรวม:\t%.2lf\n\n", result);
+        printf("\n\n\tTotal bill:\t%.2lf\n\n", result);
         int state;
-        printf("\t1.เพิ่มสินค้า\n");
-        printf("\t2.ลดสินค้า\n");
-        printf("\t3.ชำระเงิน\n");
+        printf("\t1.Add product\n");
+        printf("\t2.Remove product\n");
+        printf("\t3.Purchased\n");
         scanf("%d", &state);
         if(state == 1){
             add_item(item, result);
@@ -358,7 +358,7 @@ void select_item(struct goods item[], double result)    //function เมนู�
 
 void show_item_buy(struct goods item[])     //function แสดงสินค้าที่ซื้อไป//
 {
-    printf("\n\n\tNo\tสินค้า\tจำนวน\tราคา\n\n");
+    printf("\n\n\tNo\tProduct\tQuantity\tPrice\n\n");
     for(int j=0; j<count_item; j++){
         if(item[j].dis_count > 0){
             printf("\t%d\t%s\tx%d\t%.2lf\n", item[j].no, item[j].name, item[j].dis_count, item[j].dis_count*item[j].price);
@@ -371,17 +371,17 @@ void add_item(struct goods item[], double result)   //function เพิ่ม�
 {
     int i;
     int num;
-    printf("\n\t0.ย้อนกลับ\n");
-    printf("\n\tป้อนสินค้าที่ต้องเพิ่ม No:\t");
+    printf("\n\t0.Go back\n");
+    printf("\n\tAdd more product (Input No of product):\t");
     scanf("%d", &i);
     for(int j=0; j<count_item; j++){
         if(i == item[j].no){
-            printf("\t%s\tจำนวน:\t", item[j].name);
+            printf("\t%s\tQuantity:\t", item[j].name);
             scanf("%d", &num);
             while (num>item[j].quantity){
-                printf("\n\n\tมีสินค้าไม่เพียงพอกรุณาป้อนใหม่\n");
-                printf("\n\t0.ยกเลิก\n");
-                printf("\t%s\tจำนวน:\t", item[j].name);
+                printf("\n\n\tDon't have enough product\n");
+                printf("\n\t0.Cancel\n");
+                printf("\t%s\tQuantity:\t", item[j].name);
                 scanf("%d", &num);
                 if(num == 0){
                     select_item(item, result);
@@ -402,17 +402,17 @@ void reduce_item(struct goods item[], double result)    //function ลดสิ�
     int num;
     show_item_buy(item);
     check_discout(item);
-    printf("\n\t0.ย้อนกลับ\n");
-    printf("\n\tป้อนสินค้าที่ต้องลด No:\t");
+    printf("\n\t0.Go back\n");
+    printf("\n\tRemove product (Input No of product):\t");
     scanf("%d", &i);
     for(int j=0; j<count_item; j++){
         if(i == item[j].no){
-            printf("\t%s\tจำนวน:\t", item[j].name);
+            printf("\t%s\tQuantity:\t", item[j].name);
             scanf("%d", &num);
             while (num>item[j].dis_count){
-                printf("\n\n\tมีสินค้าไม่เพียงพอกรุณาป้อนใหม่\n");
-                printf("\n\t0.ยกเลิก\n");
-                printf("\t%s\tจำนวน:\t", item[j].name);
+                printf("\n\n\tDon't have enough product please try again\n");
+                printf("\n\t0.Go back\n");
+                printf("\t%s\tQuantity:\t", item[j].name);
                 scanf("%d", &num);
                 if(num == 0){
                     select_item(item, result);
@@ -436,7 +436,7 @@ void check_discout(struct goods item[])     //function เช็คว่าม�
         }
     }
     if(i == count_item){
-        printf("\n\t\tไม่มีสินค้า\n\n");
+        printf("\n\t\tNot found\n\n");
     }
 }
 
@@ -446,8 +446,8 @@ void bill(struct goods item[], double result)   //function แสดง bill//
     int state;
     show_item_buy(item);
     check_discout(item);
-    printf("\n\n\tจำนวนเงินที่ต้องชำระ: %.2lf\n\n", result);
-    printf("\t0.กลับไปหน้าแรก\n");
+    printf("\n\n\tTotal bill: %.2lf\n\n", result);
+    printf("\t0.Go back\n");
     scanf("%d", &state);
     if(state == 0){
         main_menu(item);
