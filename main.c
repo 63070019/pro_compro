@@ -130,7 +130,7 @@ void add_products(struct goods item[])  //function เพิ่มสินค�
         stpcpy(item[j].id, t);
 
         printf("\tName:\t");
-        scanf("%s", t);
+        scanf(" %[^\n]s", t);
         stpcpy(item[j].name, t);
 
         printf("\tType:\t");
@@ -240,7 +240,7 @@ void change(struct goods item[])    //function เปลี่ยนของข
         }
         else if(state == 2){
             printf("\tName:\t");
-            scanf("%s", t);
+            scanf(" %[^\n]s", t);
             stpcpy(item[num-1].name, t);
         }
         else if(state == 3){
@@ -462,5 +462,4 @@ void reset_discount(struct goods item[])    //function reset สินค้า�
         item[j].dis_count = 0;
     }
 }
-
 
