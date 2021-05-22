@@ -254,7 +254,7 @@ void change(struct goods item[])    //function เปลี่ยนของข
         }
         else if(state == 5){
             printf("\tQuantity:\t");
-            scanf("%lf", &item[num-1].quantity);
+            scanf("%d", &item[num-1].quantity);
         }
         else if(state == 0){
             break;
@@ -358,10 +358,10 @@ void select_item(struct goods item[], double result)    //function เมนู�
 
 void show_item_buy(struct goods item[])     //function แสดงสินค้าที่ซื้อไป//
 {
-    printf("\n\n\tNo\tProduct\tQuantity\tPrice\n\n");
+    printf("\n\n\tNo\tProduct\t\tQuantity\tPrice\n\n");
     for(int j=0; j<count_item; j++){
         if(item[j].dis_count > 0){
-            printf("\t%d\t%s\tx%d\t%.2lf\n", item[j].no, item[j].name, item[j].dis_count, item[j].dis_count*item[j].price);
+            printf("\t%d\t%s\t\tx%d\t\t%.2lf\n", item[j].no, item[j].name, item[j].dis_count, item[j].dis_count*item[j].price);
         }
     }
 }
